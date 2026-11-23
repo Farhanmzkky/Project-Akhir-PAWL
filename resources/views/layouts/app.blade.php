@@ -71,9 +71,8 @@
 @else
     <!-- Public Header (Guest) -->
     <header class="h-20 bg-white border-b border-line px-6 lg:px-12 flex items-center justify-between">
-        <a class="inline-flex items-center gap-2.5 text-2xl font-extrabold tracking-tight text-ink" href="{{ route('landing') }}">
-            <i class="glyph leaf w-8 h-8 text-forest" aria-hidden="true"></i>
-            <span>plogee</span>
+        <a class="inline-flex items-center" href="{{ route('landing') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="Plogee" class="h-16 w-auto object-contain">
         </a>
         <nav class="flex items-center gap-4">
             <a href="{{ route('login') }}" class="text-label text-forest hover:text-forest-hover px-4 py-2">Masuk</a>

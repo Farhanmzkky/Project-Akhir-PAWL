@@ -15,9 +15,8 @@
 
 <aside class="w-[224px] bg-white border-r border-line flex flex-col px-6 py-8 min-h-screen shrink-0">
     <!-- Brand -->
-    <a class="inline-flex items-center gap-2.5 text-2xl font-extrabold tracking-tight text-ink" href="{{ route('home') }}">
-        <i class="glyph leaf w-8 h-8 text-forest" aria-hidden="true"></i>
-        <span>plogee</span>
+    <a class="inline-flex items-center" href="{{ route('home') }}">
+        <img src="{{ asset('images/logo.png') }}" alt="Plogee" class="h-20 w-auto object-contain">
     </a>
 
     <!-- Space badge -->
