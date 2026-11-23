@@ -1,6 +1,6 @@
 <article class="bg-white border border-line rounded-container overflow-hidden shadow-[0_6px_0_rgba(38,62,48,0.05)] flex flex-col justify-between transition-all hover:translate-y-[-2px]">
     <div>
-        @include('components.art', ['category' => $mission->category])
+        @include('components.art', ['mission' => $mission, 'category' => $mission->category])
         <div class="p-5 flex flex-col gap-2">
             <span class="text-caption text-muted uppercase tracking-wider font-semibold">Level {{ $mission->required_level }} · {{ $mission->category }}</span>
             <h2 class="text-section text-ink hover:text-forest transition-colors">

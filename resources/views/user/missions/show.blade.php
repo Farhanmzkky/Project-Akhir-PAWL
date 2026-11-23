@@ -10,7 +10,7 @@
 
 <article class="bg-white border border-line rounded-container p-8 shadow-[0_6px_0_rgba(38,62,48,0.05)] grid grid-cols-1 lg:grid-cols-[160px_1fr] gap-8 items-start anim-scale">
     <div class="w-40 h-40 rounded-container overflow-hidden border border-line transition-transform duration-300 hover:scale-105">
-        @include('components.art', ['category' => $mission->category])
+        @include('components.art', ['mission' => $mission, 'category' => $mission->category])
     </div>
     <div>
         <p class="text-caption text-muted font-semibold uppercase tracking-wider mb-1">Level {{ $mission->required_level }} · {{ $mission->category }}</p>
