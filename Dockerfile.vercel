@@ -1,0 +1,21 @@
+FROM dunglas/frankenphp:1-php8.4-bookworm
+WORKDIR /app
+
+RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
+    && install-php-extensions pdo_mysql mbstring intl zip \
+    && printf 'upload_max_filesize=5M\npost_max_size=20M\n' > "$PHP_INI_DIR/conf.d/uploads.ini"
+
+COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
+COPY . /app
+ENV COMPOSER_ALLOW_SUPERUSER=1
+RUN mkdir -p bootstrap/cache storage/framework/views storage/framework/sessions storage/framework/cache/data storage/logs \
+    && composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader \
+    && chown -R www-data:www-data /app/storage /app/bootstrap/cache
+COPY Caddyfile /etc/frankenphp/Caddyfile
+
+ENV PORT=8080 APP_ENV=production APP_DEBUG=false LOG_CHANNEL=stderr \
+    SESSION_DRIVER=database CACHE_STORE=database QUEUE_CONNECTION=sync \
+    VIEW_COMPILED_PATH=/tmp/plogee-views XDG_CONFIG_HOME=/tmp/plogee-config XDG_DATA_HOME=/tmp/plogee-data
+USER www-data
+EXPOSE 8080
+CMD ["sh", "-c", "mkdir -p /tmp/plogee-views && exec frankenphp run --config /etc/frankenphp/Caddyfile --adapter caddyfile"]
