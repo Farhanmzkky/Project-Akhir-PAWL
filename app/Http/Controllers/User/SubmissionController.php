@@ -94,8 +94,8 @@ class SubmissionController
         }
         Storage::disk('local')->delete($obsolete);
         if ($draft) {
-            return to_route('user.my-missions')->with('notice', 'Draf tersimpan. Buka misi untuk melanjutkan.');
+            return to_route('user.my-missions')->with('notice', 'Draf bukti berhasil disimpan.');
         }
-        return to_route('user.my-missions')->with('evidence_sent', true);
+        return to_route('user.my-missions')->with('notice', 'Bukti berhasil dikirim dan menunggu verifikasi.')->with('evidence_sent', true);
     }
 }

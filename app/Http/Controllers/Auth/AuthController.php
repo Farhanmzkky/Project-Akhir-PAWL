@@ -17,7 +17,7 @@ class AuthController
         ]);
         Auth::login(User::create($data));
         $request->session()->regenerate();
-        return to_route('user.dashboard');
+        return to_route('user.dashboard')->with('notice', 'Akun berhasil dibuat! Selamat datang di Plogee 🌱');
     }
 
     public function login(Request $request)
@@ -31,7 +31,8 @@ class AuthController
                 ->onlyInput('email');
         }
         $request->session()->regenerate();
-        return to_route($request->user()->role === 'admin' ? 'admin.dashboard' : 'user.dashboard');
+        return to_route($request->user()->role === 'admin' ? 'admin.dashboard' : 'user.dashboard')
+            ->with('notice', 'Selamat datang kembali!');
     }
 
     public function logout(Request $request)
@@ -39,6 +40,6 @@ class AuthController
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return to_route('landing');
+        return to_route('landing')->with('notice', 'Kamu berhasil keluar dari akun.');
     }
 }

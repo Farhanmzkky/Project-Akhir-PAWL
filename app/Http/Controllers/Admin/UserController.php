@@ -20,6 +20,6 @@ class UserController
         $request->validate(['is_active' => ['required', 'boolean']]);
         $user->is_active = $request->boolean('is_active');
         $user->save();
-        return back()->with('notice', 'Status akun diperbarui.');
+        return back()->with('notice', $user->is_active ? 'Akun peserta berhasil diaktifkan.' : 'Akun berhasil dinonaktifkan.');
     }
 }

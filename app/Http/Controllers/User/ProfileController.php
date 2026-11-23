@@ -15,6 +15,6 @@ class ProfileController
             'email' => ['required', 'email', 'max:255', 'Rule' => Rule::unique('users')->ignore($user)],
         ]);
         $user->update($data);
-        return back()->with('notice', 'Profil berhasil disimpan.');
+        return back()->with('notice', 'Profil berhasil diperbarui.');
     }
 }
