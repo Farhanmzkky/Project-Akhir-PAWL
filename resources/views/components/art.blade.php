@@ -1,4 +1,9 @@
 @php
-    $images = ['Kebiasaan' => 'kebiasaan', 'Daur ulang' => 'daur-ulang', 'Komunitas' => 'komunitas', 'Proyek' => 'proyek'];
+    $images = [
+        'Kebiasaan' => 'kebiasaan',
+        'Daur ulang' => 'daur-ulang',
+        'Komunitas' => 'komunitas',
+        'Proyek' => 'proyek'
+    ];
 @endphp
-<img class="mission-art" src="{{ asset('images/'.($images[$category] ?? 'proyek').'.png') }}" alt="" loading="lazy">
+<img class="w-full h-32 object-cover rounded-t-[22px]" src="{{ asset('images/'.($images[$category] ?? 'proyek').'.png') }}" alt="" loading="lazy">

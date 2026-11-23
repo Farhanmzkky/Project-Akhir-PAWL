@@ -7,6 +7,94 @@
 @source "../**/*.vue";
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+
+    /* Palette dari Desain Sistem Figma Plogee */
+    --color-forest: #183F32;
+    --color-forest-hover: #102e24;
+    --color-lime: #D7F58B;
+    --color-lime-hover: #c4e96c;
+    --color-ivory: #F5F6F0;
+    --color-ink: #1E3027;
+    --color-soft: #E9F1E5;
+    --color-line: #D7E5C9;
+    --color-muted: #596B5F;
+
+    /* Status Text Colors (Sesuai Desain Sistem Dark Pill) */
+    --color-status-in-progress: #93CFF1;
+    --color-status-pending: #F5C563;
+    --color-status-approved: #92DEB4;
+    --color-status-rejected: #FFAB98;
+    --color-status-locked: #A0A0A0;
+
+    /* Radius Tokens */
+    --radius-container: 24px;
+    --radius-btn: 16px;
+    --radius-pill: 9999px;
 }
+
+/* Layer Base Utility & Icon Glyphs */
+@layer utilities {
+    .text-heading {
+        font-size: 30px;
+        line-height: 40px;
+        font-weight: 700;
+        letter-spacing: -0.035em;
+    }
+    .text-section {
+        font-size: 22px;
+        line-height: 30px;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+    }
+    .text-body {
+        font-size: 14px;
+        line-height: 22px;
+        font-weight: 400;
+    }
+    .text-label {
+        font-size: 13px;
+        line-height: 20px;
+        font-weight: 600;
+    }
+    .text-caption {
+        font-size: 11px;
+        line-height: 17px;
+        font-weight: 500;
+    }
+}
+
+/* CSS Mask Glyphs dari ikon-figma.png (8 ikon horizontal sprite) */
+.glyph {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    background-color: currentColor;
+    mask-image: url('/images/ikon-figma.png');
+    mask-size: 800% 100%;
+    mask-repeat: no-repeat;
+    -webkit-mask-image: url('/images/ikon-figma.png');
+    -webkit-mask-size: 800% 100%;
+    -webkit-mask-repeat: no-repeat;
+}
+
+.glyph.leaf { mask-position: 0% 0; -webkit-mask-position: 0% 0; }
+.glyph.home { mask-position: 14.2857% 0; -webkit-mask-position: 14.2857% 0; }
+.glyph.flag { mask-position: 28.5714% 0; -webkit-mask-position: 28.5714% 0; }
+.glyph.grid-icon { mask-position: 42.8571% 0; -webkit-mask-position: 42.8571% 0; }
+.glyph.cup { mask-position: 57.1429% 0; -webkit-mask-position: 57.1429% 0; }
+.glyph.bell { mask-position: 71.4286% 0; -webkit-mask-position: 71.4286% 0; }
+.glyph.upload { mask-position: 85.7143% 0; -webkit-mask-position: 85.7143% 0; }
+.glyph.check { mask-position: 100% 0; -webkit-mask-position: 100% 0; }
+
+/* Mission Tile Sprite */
+.mission-tile {
+    width: 96px;
+    height: 96px;
+    border-radius: 24px;
+    background: url('/images/misi-figma.png') 0 0 / 300% 100% no-repeat;
+    flex-shrink: 0;
+}
+.mission-tile.bottle { background-position: 50% 0; }
+.mission-tile.bag { background-position: 100% 0; }
