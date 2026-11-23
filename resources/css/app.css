@@ -12,6 +12,7 @@
     /* Palette dari Desain Sistem Figma Plogee */
     --color-forest: #183F32;
     --color-forest-hover: #102e24;
+    --color-forest-light: #235443;
     --color-lime: #D7F58B;
     --color-lime-hover: #c4e96c;
     --color-ivory: #F5F6F0;
@@ -61,6 +62,24 @@
         font-size: 11px;
         line-height: 17px;
         font-weight: 500;
+    }
+
+    /* Pola latar belakang alami yang halus */
+    .bg-eco-pattern {
+        background-image: radial-gradient(rgba(24, 63, 50, 0.07) 1px, transparent 1px);
+        background-size: 24px 24px;
+    }
+
+    /* Animasi float halus untuk elemen floating badge */
+    @keyframes subtle-float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); }
+    }
+    .animate-float {
+        animation: subtle-float 4s ease-in-out infinite;
+    }
+    .animate-float-delayed {
+        animation: subtle-float 5s ease-in-out 1.5s infinite;
     }
 }
 
