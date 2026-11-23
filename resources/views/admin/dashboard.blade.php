@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Dashboard admin')
 @section('content')
-<h1 class="text-heading text-ink mb-6">Dashboard admin</h1>
+<h1 class="text-heading text-ink mb-6 anim-fade-up">Dashboard admin</h1>
 
 <!-- Stats Grid -->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
@@ -12,15 +12,17 @@
     'Menunggu verifikasi' => $counts->get('pending', 0),
     'XP diberikan' => $xp
 ] as $label => $value)
-    <section class="bg-white border border-line rounded-container p-5 shadow-[0_6px_0_rgba(38,62,48,0.05)]">
+    <section class="bg-white border border-line rounded-container p-5 shadow-[0_6px_0_rgba(38,62,48,0.05)]
+                    card-hover row-anim"
+             style="animation-delay: {{ $loop->index * 0.07 }}s">
         <span class="text-caption text-muted uppercase font-semibold tracking-wider block">{{ $label }}</span>
-        <p class="text-3xl font-extrabold text-ink mt-2">{{ number_format($value, 0, ',', '.') }}</p>
+        <p class="text-3xl font-extrabold text-ink mt-2 stat-bounce">{{ number_format($value, 0, ',', '.') }}</p>
     </section>
 @endforeach
 </div>
 
 <!-- Review Queue Chart & Activity -->
-<section class="bg-white border border-line rounded-container p-6 shadow-[0_6px_0_rgba(38,62,48,0.05)]">
+<section class="bg-white border border-line rounded-container p-6 shadow-[0_6px_0_rgba(38,62,48,0.05)] anim-fade-up delay-5">
     <div class="flex items-center justify-between gap-4 mb-4">
         <div>
             <h2 class="text-section text-ink">Status pengiriman bukti</h2>
@@ -59,6 +61,7 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                animation: { duration: 900, easing: 'easeOutQuart' },
                 plugins: { legend: { display: false } },
                 scales: {
                     y: {

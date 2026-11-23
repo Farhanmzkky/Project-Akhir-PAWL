@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('title', 'Misi saya')
 @section('content')
-<header class="mb-6">
+<header class="mb-6 anim-fade-up">
     <h1 class="text-heading text-ink">Setiap aksi punya cerita.</h1>
     <p class="text-body text-muted mt-1">Pantau aktivitas, hasil review, dan bukti yang perlu diperbaiki.</p>
 </header>
 
 @if(session('evidence_sent'))
-    <div class="bg-soft border border-line text-forest p-4 rounded-btn mb-6 flex items-center gap-3" role="status">
+    <div class="bg-soft border border-line text-forest p-4 rounded-btn mb-6 flex items-center gap-3 anim-fade-up eco-pulse" role="status">
         <i class="glyph check text-forest" aria-hidden="true"></i>
         <div>
             <strong class="text-label block font-bold">Bukti berhasil dikirim. Terima kasih sudah beraksi!</strong>
@@ -17,18 +17,20 @@
 @endif
 
 <!-- Filter Pills -->
-<nav class="flex gap-2.5 flex-wrap mb-6" aria-label="Filter status misi">
+<nav class="flex gap-2.5 flex-wrap mb-6 anim-fade-up delay-1" aria-label="Filter status misi">
     @foreach($filters as $key => $label)
         @php $isCurrent = $selected === $key; @endphp
         <a href="{{ route('user.my-missions', $key === 'all' ? [] : ['status' => $key]) }}"
            class="px-4 py-1.5 rounded-full text-caption font-semibold transition-all min-h-[36px] inline-flex items-center
-                  {{ $isCurrent ? 'bg-forest text-white' : 'bg-white text-muted border border-line hover:border-forest' }}">
+                  {{ $isCurrent
+                      ? 'bg-forest text-white shadow-sm'
+                      : 'bg-white text-muted border border-line hover:border-forest hover:text-ink hover:-translate-y-0.5' }}">
             <span>{{ $label }} ({{ $counts->get($key, 0) }})</span>
         </a>
     @endforeach
 </nav>
 
-<!-- Activity List Cards (Sesuai Frame Misi Saya) -->
+<!-- Activity List Cards -->
 <div class="flex flex-col gap-4">
 @forelse($participants as $participant)
     @php
@@ -50,12 +52,16 @@
             : route('user.evidence', $participant);
     @endphp
 
-    <article class="bg-white border border-line rounded-container p-6 shadow-[0_6px_0_rgba(38,62,48,0.05)] grid grid-cols-1 md:grid-cols-[96px_1fr_auto] gap-5 items-center">
+    <article class="bg-white border border-line rounded-container p-6 shadow-[0_6px_0_rgba(38,62,48,0.05)]
+                    grid grid-cols-1 md:grid-cols-[96px_1fr_auto] gap-5 items-center
+                    hover:border-forest hover:shadow-[0_8px_24px_rgba(24,63,50,0.09)]
+                    transition-all duration-200 row-anim"
+             style="animation-delay: {{ $loop->index * 0.07 }}s">
         <!-- Mission Tile -->
         @if($tile)
-            <div class="mission-tile {{ $tile }}" aria-hidden="true"></div>
+            <div class="mission-tile {{ $tile }} transition-transform duration-300 hover:scale-105" aria-hidden="true"></div>
         @else
-            <div class="w-24 h-24 rounded-container overflow-hidden shrink-0 border border-line">
+            <div class="w-24 h-24 rounded-container overflow-hidden shrink-0 border border-line transition-transform duration-300 hover:scale-105">
                 @include('components.art', ['category' => $mission->category])
             </div>
         @endif
@@ -90,14 +96,14 @@
                 {{ $actionText }}
             </x-action>
             @if($participant->status === 'completed')
-                <a class="text-caption text-forest text-center hover:underline py-1" href="{{ route('user.evidence', $participant) }}">
+                <a class="text-caption text-forest text-center hover:underline py-1 transition-colors" href="{{ route('user.evidence', $participant) }}">
                     Riwayat bukti
                 </a>
             @endif
         </div>
     </article>
 @empty
-    <div class="bg-white border border-line rounded-container p-12 text-center">
+    <div class="bg-white border border-line rounded-container p-12 text-center anim-scale">
         <h2 class="text-section text-ink mb-2">
             {{ $selected === 'all' ? 'Yuk, mulai misi pertamamu.' : 'Belum ada misi dengan status ini.' }}
         </h2>

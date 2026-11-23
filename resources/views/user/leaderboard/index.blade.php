@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('title', 'Leaderboard')
 @section('content')
-<header class="mb-6">
+<header class="mb-6 anim-fade-up">
     <h1 class="text-heading text-ink">Leaderboard</h1>
     <p class="text-body text-muted mt-1">Peringkat sepanjang waktu berdasarkan XP dari misi yang disetujui.</p>
 </header>
 
-<div class="bg-white border border-line rounded-container overflow-hidden shadow-[0_6px_0_rgba(38,62,48,0.05)]">
+<div class="bg-white border border-line rounded-container overflow-hidden shadow-[0_6px_0_rgba(38,62,48,0.05)] anim-scale">
     <div class="overflow-x-auto">
         <table class="w-full text-left text-body border-collapse">
             <thead>
@@ -21,12 +21,24 @@
             <tbody class="divide-y divide-line">
             @foreach($users as $user)
                 @php $isMe = $user->id === auth()->id(); @endphp
-                <tr class="transition-colors {{ $isMe ? 'bg-lime/20 font-semibold' : 'hover:bg-ivory/60' }}">
-                    <td class="px-6 py-4 text-forest font-bold">#{{ $users->firstItem() + $loop->index }}</td>
+                <tr class="transition-all duration-150 row-anim
+                           {{ $isMe ? 'bg-lime/20 font-semibold' : 'hover:bg-soft/60 hover:translate-x-0.5' }}"
+                    style="animation-delay: {{ $loop->index * 0.05 }}s">
+                    <td class="px-6 py-4 font-bold">
+                        @if($loop->index === 0)
+                            <span class="text-xl">🥇</span>
+                        @elseif($loop->index === 1)
+                            <span class="text-xl">🥈</span>
+                        @elseif($loop->index === 2)
+                            <span class="text-xl">🥉</span>
+                        @else
+                            <span class="text-forest">#{{ $users->firstItem() + $loop->index }}</span>
+                        @endif
+                    </td>
                     <td class="px-6 py-4 text-ink flex items-center gap-2">
                         <span>{{ $user->name }}</span>
                         @if($isMe)
-                            <span class="text-caption bg-forest text-white px-2 py-0.5 rounded-full">kamu</span>
+                            <span class="text-caption bg-forest text-white px-2 py-0.5 rounded-full eco-pulse">kamu</span>
                         @endif
                     </td>
                     <td class="px-6 py-4 text-muted">Level {{ \App\Services\GamificationService::level($user->total_xp) }}</td>
@@ -39,7 +51,7 @@
     </div>
 </div>
 
-<div class="mt-6">
+<div class="mt-6 anim-fade delay-5">
     {{ $users->links() }}
 </div>
 @endsection
