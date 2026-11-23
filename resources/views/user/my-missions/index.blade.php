@@ -58,14 +58,10 @@
                     transition-all duration-200 row-anim cursor-pointer select-none"
              onclick="if (!event.target.closest('a, button')) window.location='{{ $actionRoute }}'"
              style="animation-delay: {{ $loop->index * 0.07 }}s">
-        <!-- Mission Tile -->
-        @if($tile)
-            <div class="mission-tile {{ $tile }} transition-transform duration-300 hover:scale-105" aria-hidden="true"></div>
-        @else
-            <div class="w-24 h-24 rounded-container overflow-hidden shrink-0 border border-line transition-transform duration-300 hover:scale-105">
-                @include('components.art', ['category' => $mission->category])
-            </div>
-        @endif
+        <!-- Thumbnail Misi Konsisten -->
+        <div class="w-24 h-24 rounded-container overflow-hidden shrink-0 border border-line transition-transform duration-300 hover:scale-105">
+            @include('components.art', ['mission' => $mission, 'category' => $mission->category])
+        </div>
 
         <!-- Mission Copy -->
         <div class="flex flex-col gap-1.5">
