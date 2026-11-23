@@ -11,6 +11,6 @@ class MissionParticipationController
     public function store(Request $request, Mission $mission, MissionService $service)
     {
         $service->join($request->user(), $mission);
-        return to_route('user.my-missions')->with('notice', 'Misi tersimpan di Misi Saya.');
+        return to_route('user.my-missions')->with('notice', 'Kamu berhasil bergabung dengan misi!');
     }
 }

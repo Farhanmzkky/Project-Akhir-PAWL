@@ -1,9 +1,12 @@
 @extends('layouts.app')
 @section('title', 'Tinjau bukti')
 @section('content')
-<div class="mb-6 flex items-center justify-between">
+<div class="mb-4">
+    <x-back-button :fallback="route('admin.submissions.index')" label="Kembali ke daftar bukti" />
+</div>
+
+<div class="mb-6">
     <h1 class="text-heading text-ink">{{ $submission->participant->mission->display_title }}</h1>
-    <a href="{{ route('admin.submissions.index') }}" class="text-label text-forest hover:underline">← Kembali ke antrean</a>
 </div>
 
 <div class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-6 items-start">
@@ -38,14 +41,21 @@
         <h2 class="text-section text-ink">Keputusan verifikasi</h2>
 
         @if($submission->status === 'pending')
-            <form method="POST" action="{{ route('admin.submissions.approve', $submission) }}">
+            <form method="POST" action="{{ route('admin.submissions.approve', $submission) }}"
+                  data-confirm="Apakah kamu yakin ingin menyetujui bukti misi ini dan memberikan {{ $submission->participant->reward_xp_snapshot }} XP kepada {{ $submission->participant->user->name }}?"
+                  data-confirm-title="Setujui Bukti Misi"
+                  data-confirm-btn="Ya, Setujui & Berikan XP">
                 @csrf
                 <x-action class="w-full">Setujui & berikan XP</x-action>
             </form>
 
             <hr class="border-line">
 
-            <form class="flex flex-col gap-3" method="POST" action="{{ route('admin.submissions.reject', $submission) }}">
+            <form class="flex flex-col gap-3" method="POST" action="{{ route('admin.submissions.reject', $submission) }}"
+                  data-confirm="Apakah kamu yakin ingin menolak bukti misi ini dan meminta peserta melakukan perbaikan?"
+                  data-confirm-title="Tolak Bukti Misi"
+                  data-confirm-btn="Ya, Tolak Bukti"
+                  data-confirm-variant="danger">
                 @csrf
                 <label class="flex flex-col gap-1.5">
                     <span class="text-label text-ink">Alasan penolakan</span>

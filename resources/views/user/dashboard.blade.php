@@ -66,21 +66,28 @@
     </div>
     <div class="flex flex-col gap-3">
         @forelse($ongoing as $participant)
-            <div class="bg-white border border-line rounded-2xl p-4 px-6 flex items-center justify-between gap-4 shadow-sm
-                        hover:border-forest hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 row-anim"
-                 style="animation-delay: {{ $loop->index * 0.07 }}s">
-                <a href="{{ route('user.evidence', $participant) }}" class="text-body font-semibold text-ink hover:text-forest transition-colors">
+            <a href="{{ route('user.evidence', $participant) }}"
+               class="group bg-white border border-line rounded-2xl p-4 px-6 flex items-center justify-between gap-4 shadow-sm
+                      hover:border-forest hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 row-anim cursor-pointer block select-none"
+               style="animation-delay: {{ $loop->index * 0.07 }}s">
+                <span class="text-body font-semibold text-ink group-hover:text-forest transition-colors">
                     {{ $participant->mission->display_title }}
-                </a>
+                </span>
                 <div class="flex items-center gap-3">
                     @include('components.status', ['status' => $participant->status])
-                    <a href="{{ route('user.evidence', $participant) }}" class="text-caption font-semibold text-forest hover:underline">Buka →</a>
+                    <span class="text-caption font-semibold text-forest group-hover:underline">Buka →</span>
                 </div>
-            </div>
+            </a>
         @empty
-            <div class="bg-white border border-line rounded-container p-8 text-center anim-fade">
-                <p class="text-body text-muted">Belum ada misi yang sedang berjalan.</p>
-                <a href="{{ route('user.missions.index') }}" class="text-label text-forest font-semibold hover:underline mt-2 inline-block">Mulai dengan memilih satu misi</a>
+            <div class="bg-white border border-line rounded-container p-8 text-center flex flex-col items-center justify-center gap-3 anim-fade shadow-sm">
+                <div class="w-12 h-12 rounded-full bg-soft text-forest flex items-center justify-center text-xl">
+                    🌱
+                </div>
+                <h3 class="text-label text-ink font-bold">Belum ada misi yang sedang berjalan</h3>
+                <p class="text-body text-muted max-w-sm">Mulai aksi pertamamu hari ini untuk membantu lingkungan dan kumpulkan poin XP!</p>
+                <a href="{{ route('user.missions.index') }}" class="inline-flex items-center gap-1.5 text-label text-forest font-bold hover:underline mt-1">
+                    Pilih Misi Sekarang →
+                </a>
             </div>
         @endforelse
     </div>
@@ -103,8 +110,9 @@
                 </div>
             </div>
         @empty
-            <div class="sm:col-span-3 bg-white border border-line rounded-container p-6 text-center text-body text-muted anim-fade">
-                Selesaikan misi pertamamu untuk memperoleh badge <strong>First Step</strong>! 🌱
+            <div class="sm:col-span-3 bg-white border border-line rounded-container p-6 text-center flex flex-col items-center justify-center gap-2 text-body text-muted anim-fade shadow-sm">
+                <span class="text-3xl" aria-hidden="true">🌱</span>
+                <p>Belum ada badge yang diperoleh. Selesaikan misi pertamamu untuk meraih badge <strong>First Step</strong>!</p>
             </div>
         @endforelse
     </div>

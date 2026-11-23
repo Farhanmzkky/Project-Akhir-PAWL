@@ -2,13 +2,7 @@
 @section('title', 'Form misi')
 @section('content')
 
-<div class="flex items-center gap-3 mb-6 anim-fade-up">
-    <a href="{{ route('admin.missions.index') }}"
-       class="inline-flex items-center gap-1.5 text-label text-muted hover:text-ink transition-colors group">
-        <span class="transition-transform group-hover:-translate-x-1 duration-200">←</span>
-        Kelola misi
-    </a>
-</div>
+<x-back-button :fallback="route('admin.missions.index')" label="Kembali ke Kelola Misi" />
 
 <div class="max-w-2xl anim-scale">
     <h1 class="text-heading text-ink mb-6">{{ $mission->exists ? 'Edit misi' : 'Tambah misi baru' }}</h1>

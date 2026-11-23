@@ -2,7 +2,7 @@
 @section('title', 'Misi saya')
 @section('content')
 <header class="mb-6 anim-fade-up">
-    <h1 class="text-heading text-ink">Setiap aksi punya cerita.</h1>
+    <h1 class="text-heading text-ink">Setiap aksi punya cerita</h1>
     <p class="text-body text-muted mt-1">Pantau aktivitas, hasil review, dan bukti yang perlu diperbaiki.</p>
 </header>
 
@@ -52,10 +52,11 @@
             : route('user.evidence', $participant);
     @endphp
 
-    <article class="bg-white border border-line rounded-container p-6 shadow-[0_6px_0_rgba(38,62,48,0.05)]
+    <article class="group bg-white border border-line rounded-container p-6 shadow-[0_6px_0_rgba(38,62,48,0.05)]
                     grid grid-cols-1 md:grid-cols-[96px_1fr_auto] gap-5 items-center
-                    hover:border-forest hover:shadow-[0_8px_24px_rgba(24,63,50,0.09)]
-                    transition-all duration-200 row-anim"
+                    hover:border-forest hover:shadow-[0_10px_28px_rgba(24,63,50,0.10)] hover:-translate-y-0.5
+                    transition-all duration-200 row-anim cursor-pointer select-none"
+             onclick="if (!event.target.closest('a, button')) window.location='{{ $actionRoute }}'"
              style="animation-delay: {{ $loop->index * 0.07 }}s">
         <!-- Mission Tile -->
         @if($tile)
@@ -103,13 +104,32 @@
         </div>
     </article>
 @empty
-    <div class="bg-white border border-line rounded-container p-12 text-center anim-scale">
-        <h2 class="text-section text-ink mb-2">
-            {{ $selected === 'all' ? 'Yuk, mulai misi pertamamu.' : 'Belum ada misi dengan status ini.' }}
-        </h2>
-        <a href="{{ $selected === 'all' ? route('user.missions.index') : route('user.my-missions') }}" class="text-label text-forest font-semibold hover:underline">
-            {{ $selected === 'all' ? 'Jelajahi misi sekarang' : 'Lihat semua misi' }}
-        </a>
+    <div class="bg-white border border-line rounded-container p-12 text-center flex flex-col items-center justify-center gap-4 anim-scale shadow-sm">
+        <div class="w-16 h-16 rounded-full bg-soft text-forest flex items-center justify-center text-3xl">
+            🌿
+        </div>
+        <div>
+            <h2 class="text-section text-ink font-bold">
+                {{ $selected === 'all' ? 'Yuk, mulai misi pertamamu!' : 'Belum ada misi dengan status ini.' }}
+            </h2>
+            <p class="text-body text-muted mt-1 max-w-md">
+                {{ $selected === 'all'
+                    ? 'Pilih aksi ramah lingkungan di kampus, kumpulkan poin XP, dan raih badge pencapaian bersama teman-temanmu.'
+                    : 'Kamu belum memiliki aktivitas misi dengan status ini. Coba cek kategori status lainnya.' }}
+            </p>
+        </div>
+        <div class="pt-2">
+            @if($selected === 'all')
+                <x-action :href="route('user.missions.index')" onclick="window.location='{{ route('user.missions.index') }}'">
+                    Jelajahi Misi Sekarang →
+                </x-action>
+            @else
+                <a href="{{ route('user.my-missions') }}"
+                   class="inline-flex items-center justify-center min-h-[42px] px-6 rounded-btn bg-forest text-white text-label font-semibold hover:bg-forest-hover transition-colors shadow-sm">
+                    Tampilkan Semua Misi Saya
+                </a>
+            @endif
+        </div>
     </div>
 @endforelse
 </div>

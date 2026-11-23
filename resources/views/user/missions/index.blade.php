@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Jelajahi misi')
 @section('content')
-<h1 class="text-heading text-ink mb-6 anim-fade-up">Jelajahi misi</h1>
+<h1 class="text-heading text-ink mb-6 anim-fade-up">Ayo explore misimu!</h1>
 
 <form class="bg-white border border-line rounded-container p-5 mb-8 flex flex-wrap items-end gap-4 shadow-sm anim-fade-up delay-1" method="GET" action="{{ route('user.missions.index') }}">
     <label class="flex flex-col gap-1.5 min-w-[180px]">
@@ -36,8 +36,18 @@
         @include('components.mission-card', ['participation' => $joined->get($mission->id)])
     </div>
 @empty
-    <div class="col-span-3 bg-white border border-line rounded-container p-12 text-center text-body text-muted anim-fade">
-        Belum ada misi yang cocok dengan filter yang dipilih.
+    <div class="col-span-1 md:col-span-2 lg:col-span-3 bg-white border border-line rounded-container p-12 text-center flex flex-col items-center justify-center gap-3 anim-fade shadow-sm">
+        <div class="w-16 h-16 rounded-full bg-soft text-forest flex items-center justify-center text-2xl">
+            🌱
+        </div>
+        <h3 class="text-section text-ink font-bold">Tidak ada misi yang cocok</h3>
+        <p class="text-body text-muted max-w-md">
+            Coba ubah filter level atau kategori untuk menemukan misi lain yang siap kamu kerjakan.
+        </p>
+        <a href="{{ route('user.missions.index') }}"
+           class="mt-2 inline-flex items-center justify-center min-h-[42px] px-6 rounded-btn bg-forest text-white text-label font-semibold hover:bg-forest-hover transition-colors shadow-sm">
+            Tampilkan Semua Misi
+        </a>
     </div>
 @endforelse
 </div>

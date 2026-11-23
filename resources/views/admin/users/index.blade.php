@@ -25,10 +25,14 @@
                         </span>
                     </td>
                     <td class="px-6 py-4 text-right">
-                        <form method="POST" action="{{ route('admin.users.update', $user) }}" class="inline">
+                        <form method="POST" action="{{ route('admin.users.update', $user) }}" class="inline"
+                              data-confirm="Apakah kamu yakin ingin {{ $user->is_active ? 'menonaktifkan' : 'mengaktifkan kembali' }} akun peserta '{{ $user->name }}'?"
+                              data-confirm-title="{{ $user->is_active ? 'Konfirmasi Nonaktifkan Akun' : 'Konfirmasi Aktifkan Akun' }}"
+                              data-confirm-btn="Ya, {{ $user->is_active ? 'Nonaktifkan' : 'Aktifkan' }}"
+                              data-confirm-variant="{{ $user->is_active ? 'danger' : 'primary' }}">
                             @csrf @method('PATCH')
                             <input type="hidden" name="is_active" value="{{ $user->is_active ? 0 : 1 }}">
-                            <button type="submit" class="text-label font-semibold hover:underline {{ $user->is_active ? 'text-[#903E35]' : 'text-forest' }}">
+                            <button type="submit" class="text-label font-semibold hover:underline cursor-pointer {{ $user->is_active ? 'text-[#903E35]' : 'text-forest' }}">
                                 {{ $user->is_active ? 'Nonaktifkan' : 'Aktifkan' }}
                             </button>
                         </form>
@@ -36,7 +40,12 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4" class="px-6 py-8 text-center text-muted">Belum ada peserta terdaftar.</td>
+                    <td colspan="4" class="px-6 py-12 text-center text-muted">
+                        <div class="flex flex-col items-center justify-center gap-2">
+                            <span class="text-3xl">👥</span>
+                            <span class="text-label text-ink font-semibold">Belum ada peserta terdaftar</span>
+                        </div>
+                    </td>
                 </tr>
             @endforelse
             </tbody>

@@ -66,6 +66,7 @@ class SubmissionReviewController
             }
         }, 3);
 
-        return to_route('admin.submissions.index')->with('notice', 'Keputusan verifikasi disimpan.');
+        $message = $decision === 'approved' ? 'Bukti misi berhasil disetujui.' : 'Bukti misi berhasil ditolak dan meminta perbaikan.';
+        return to_route('admin.submissions.index')->with('notice', $message);
     }
 }

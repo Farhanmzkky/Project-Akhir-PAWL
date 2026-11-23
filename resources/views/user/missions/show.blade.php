@@ -2,11 +2,7 @@
 @section('title', 'Detail misi')
 @section('content')
 
-<a href="{{ route('user.missions.index') }}"
-   class="inline-flex items-center gap-1.5 text-label text-muted hover:text-ink transition-colors mb-6 group anim-fade-up">
-    <span class="transition-transform group-hover:-translate-x-1 duration-200">←</span>
-    Katalog misi
-</a>
+<x-back-button :fallback="route('user.missions.index')" label="Kembali ke katalog misi" />
 
 <article class="bg-white border border-line rounded-container p-8 shadow-[0_6px_0_rgba(38,62,48,0.05)] grid grid-cols-1 lg:grid-cols-[160px_1fr] gap-8 items-start anim-scale">
     <div class="w-40 h-40 rounded-container overflow-hidden border border-line transition-transform duration-300 hover:scale-105">
@@ -40,7 +36,10 @@
                 🔒 Misi terbuka saat kamu mencapai <strong>Level {{ $mission->required_level }}</strong>.
             </p>
         @else
-            <form method="POST" action="{{ route('user.missions.join', $mission) }}">
+            <form method="POST" action="{{ route('user.missions.join', $mission) }}"
+                  data-confirm="Apakah kamu yakin ingin mengikuti misi '{{ $mission->display_title }}'?"
+                  data-confirm-title="Ikuti Misi"
+                  data-confirm-btn="Ya, Ikuti Misi">
                 @csrf
                 <x-action>Ikuti misi ini</x-action>
             </form>

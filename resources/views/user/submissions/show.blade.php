@@ -6,6 +6,8 @@
     $savedPhotos = collect($participant->draft_photos ?? [])->pluck('name');
 @endphp
 
+<x-back-button :fallback="route('user.my-missions')" label="Kembali ke Misi Saya" />
+
 <header class="mb-6">
     <h1 class="text-heading text-ink">
         {{ $canSubmit ? 'Tunjukkan aksi nyatamu.' : 'Riwayat bukti kegiatanmu.' }}
@@ -83,9 +85,14 @@
 
             <!-- Action buttons -->
             <div class="flex flex-wrap gap-3 mt-8">
-                <x-action class="min-w-[180px]">Kirim bukti</x-action>
+                <x-action class="min-w-[180px]"
+                          data-confirm="Apakah kamu yakin ingin mengirim bukti ini untuk ditinjau oleh admin?"
+                          data-confirm-title="Kirim Bukti Kegiatan"
+                          data-confirm-btn="Ya, Kirim Sekarang">
+                    Kirim bukti
+                </x-action>
                 <x-action variant="secondary" type="submit" formaction="{{ route('user.evidence.draft', $participant) }}" formnovalidate>
-                    Simpan & kembali
+                    Simpan draf & kembali
                 </x-action>
             </div>
         </form>

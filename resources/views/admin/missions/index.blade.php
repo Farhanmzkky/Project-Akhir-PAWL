@@ -37,7 +37,15 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5" class="px-6 py-8 text-center text-muted">Belum ada misi.</td>
+                    <td colspan="5" class="px-6 py-12 text-center text-muted">
+                        <div class="flex flex-col items-center justify-center gap-2">
+                            <span class="text-3xl">🎯</span>
+                            <span class="text-label text-ink font-bold">Belum ada misi yang dibuat</span>
+                            <a href="{{ route('admin.missions.create') }}" class="text-caption text-forest font-bold hover:underline mt-1">
+                                + Tambah Misi Baru Sekarang
+                            </a>
+                        </div>
+                    </td>
                 </tr>
             @endforelse
             </tbody>

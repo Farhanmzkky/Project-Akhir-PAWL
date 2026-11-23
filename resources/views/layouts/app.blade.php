@@ -28,9 +28,7 @@
             <!-- Topbar Header -->
             <header class="h-20 bg-white border-b border-line px-8 flex items-center justify-between gap-4">
                 <div class="text-label text-muted">
-                    <span>{{ $admin ? 'Ruang admin' : 'Ruang hijau' }}</span>
-                    <span class="mx-1 text-line">/</span>
-                    <span class="text-ink font-semibold">@yield('title', 'Dashboard')</span>
+                    <span class="text-ink text-2xl font-bold">@yield('title', 'Dashboard')</span>
                 </div>
                 <div class="flex items-center gap-3">
                     <time class="text-caption text-muted font-medium" datetime="{{ now('Asia/Jakarta')->toDateString() }}">
@@ -52,7 +50,11 @@
                             @unless($admin)
                                 <a href="{{ route('user.profile') }}" class="text-body text-ink hover:text-forest py-1">Profil saya</a>
                             @endunless
-                            <form method="post" action="{{ route('logout') }}">
+                            <form method="post" action="{{ route('logout') }}"
+                                  data-confirm="Apakah kamu yakin ingin keluar dari akun Plogee?"
+                                  data-confirm-title="Keluar dari Akun"
+                                  data-confirm-btn="Ya, Keluar"
+                                  data-confirm-variant="danger">
                                 @csrf
                                 <button type="submit" class="text-body text-[#903E35] hover:underline py-1 w-full text-left font-medium">Keluar</button>
                             </form>
@@ -91,6 +93,33 @@
         Plogee · Ruang aksi hijau berkelanjutan
     </footer>
 @endauth
+
+@include('components.toast')
+@include('components.confirm-modal')
+
+<script>
+document.addEventListener('submit', function(e) {
+    const form = e.target;
+    if (e.defaultPrevented) return;
+    const submitBtns = form.querySelectorAll('button[type="submit"]');
+    setTimeout(() => {
+        submitBtns.forEach(btn => {
+            if (!btn.disabled && !btn.hasAttribute('formnovalidate')) {
+                const textSpan = btn.querySelector('.btn-text') || btn;
+                btn.dataset.origHtml = textSpan.innerHTML;
+                textSpan.innerHTML = `
+                    <svg class="animate-spin w-4 h-4 inline-block text-current mr-2" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Memproses...</span>
+                `;
+                btn.disabled = true;
+            }
+        });
+    }, 50);
+});
+</script>
 
 @stack('scripts')
 </body>

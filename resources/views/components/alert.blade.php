@@ -1,3 +1,4 @@
+<noscript>
 @if(session('notice'))
     <div role="status" class="bg-soft border border-line text-forest px-5 py-3.5 rounded-btn mb-4 text-body font-medium flex items-center gap-3">
         <i class="glyph check text-forest" aria-hidden="true"></i>
@@ -14,3 +15,4 @@
         </ul>
     </div>
 @endif
+</noscript>

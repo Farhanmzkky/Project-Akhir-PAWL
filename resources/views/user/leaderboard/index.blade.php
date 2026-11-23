@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('title', 'Leaderboard')
 @section('content')
+<x-back-button :fallback="route('user.dashboard')" label="Kembali ke Dashboard" />
+
 <header class="mb-6 anim-fade-up">
     <h1 class="text-heading text-ink">Leaderboard</h1>
     <p class="text-body text-muted mt-1">Peringkat sepanjang waktu berdasarkan XP dari misi yang disetujui.</p>

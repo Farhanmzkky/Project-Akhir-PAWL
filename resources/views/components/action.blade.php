@@ -4,7 +4,7 @@
 ])
 
 @php
-    $baseClass = "inline-flex items-center justify-center min-h-[44px] px-6 rounded-btn text-label transition-all cursor-pointer font-semibold select-none";
+    $baseClass = "inline-flex items-center justify-center min-h-[44px] px-6 rounded-btn text-label transition-all cursor-pointer font-semibold select-none disabled:opacity-60 disabled:cursor-not-allowed disabled:pointer-events-none";
     $variants = [
         'primary' => "bg-forest text-white shadow-[0_4px_0_rgba(24,63,50,0.20)] hover:bg-forest-hover active:translate-y-0.5 active:shadow-none",
         'secondary' => "bg-white text-forest border border-line shadow-[0_4px_0_rgba(24,63,50,0.08)] hover:bg-soft active:translate-y-0.5 active:shadow-none",
@@ -14,5 +14,5 @@
 @endphp
 
 <button {{ $attributes->merge(['type' => $type, 'class' => "$baseClass " . ($variants[$variant] ?? $variants['primary'])]) }}>
-    {{ $slot }}
+    <span class="btn-text inline-flex items-center gap-2">{{ $slot }}</span>
 </button>

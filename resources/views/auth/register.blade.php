@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('title', 'Buat akun peserta')
 @section('content')
+<div class="max-w-md mx-auto">
+    <x-back-button :fallback="route('landing')" label="Kembali ke Beranda" />
+</div>
+
 <div class="max-w-md mx-auto bg-white border border-line rounded-container p-8 shadow-[0_6px_0_rgba(38,62,48,0.05)] anim-scale">
     <h1 class="text-heading text-ink mb-6">Buat akun peserta</h1>
     <form class="flex flex-col gap-4" method="POST" action="{{ route('register.store') }}">

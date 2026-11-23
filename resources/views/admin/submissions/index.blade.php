@@ -36,8 +36,16 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4" class="px-6 py-12 text-center text-muted">
-                        {{ $history ? 'Belum ada keputusan verifikasi.' : 'Semua bukti sudah ditangani atau belum ada pengiriman baru.' }}
+                    <td colspan="4" class="px-6 py-14 text-center">
+                        <div class="flex flex-col items-center justify-center gap-2.5">
+                            <span class="text-4xl">{{ $history ? '📋' : '✨' }}</span>
+                            <strong class="text-label text-ink font-bold">
+                                {{ $history ? 'Belum ada riwayat verifikasi' : 'Semua bukti telah ditinjau!' }}
+                            </strong>
+                            <p class="text-caption text-muted max-w-sm">
+                                {{ $history ? 'Keputusan verifikasi bukti yang telah dinilai akan tercatat di halaman ini.' : 'Tidak ada antrean bukti kegiatan yang menunggu verifikasi saat ini. Kerja bagus!' }}
+                            </p>
+                        </div>
                     </td>
                 </tr>
             @endforelse
