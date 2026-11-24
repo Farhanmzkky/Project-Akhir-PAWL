@@ -19,8 +19,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if ($this->app->environment('production')) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+
         \Illuminate\Support\Facades\Vite::createAssetPathsUsing(
-        fn (string $path) => '/' . ltrim($path, '/')
+            fn (string $path) => '/' . ltrim($path, '/')
         );
     }
 }
